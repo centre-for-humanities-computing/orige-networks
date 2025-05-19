@@ -1,0 +1,791 @@
+{
+  "name": "Originet DB",
+  "collections": [{
+      "name": {
+        "singular": "reference",
+        "plural": "references"
+      },
+      "ui": {
+        "manage": {
+          "fields": [
+            "work",
+            "reference",
+            "quotations",
+            "doctrines"
+          ]
+        }
+      },
+      "fields": [{
+          "propName": "work",
+          "title": "Work",
+          "type": "enum",
+          "required": true,
+          "options": [{
+              "value": "Adnotationes in Deuteronomium (Adnot.Deut.)",
+              "title": "Adnotationes in Deuteronomium (Adnot.Deut.)"
+            }, {
+              "value": "Adnotationes in Exodum (Adnot.Exod)",
+              "title": "Adnotationes in Exodum (Adnot.Exod)"
+            }, {
+              "value": "Adnotationes in Genesim (Adnot. Gen.)",
+              "title": "Adnotationes in Genesim (Adnot. Gen.)"
+            }, {
+              "value": "Adnotationes in Jesum filium Nave (Adnot.Jes.Nav.)",
+              "title": "Adnotationes in Jesum filium Nave (Adnot.Jes.Nav.)"
+            }, {
+              "value": "Adnotationes in Judices (Adnot.Judic.)",
+              "title": "Adnotationes in Judices (Adnot.Judic.)"
+            }, {
+              "value": "Adnotationes in Leviticum (Adnot.Lev.)",
+              "title": "Adnotationes in Leviticum (Adnot.Lev.)"
+            }, {
+              "value": "Adnotationes in Numeros (Adnot.Num.)",
+              "title": "Adnotationes in Numeros (Adnot.Num.)"
+            }, {
+              "value": "In Jesu Nave homiliae xxvi (Hom.Jes.Nav.)",
+              "title": "In Jesu Nave homiliae xxvi (Hom.Jes.Nav.)"
+            }, {
+              "value": "In Canticum canticorum (libri duo quos scripsit in adulescentia) (Cant.(Adulesc.))",
+              "title": "In Canticum canticorum (libri duo quos scripsit in adulescentia) (Cant.(Adulesc.))"
+            }, {
+              "value": "Commentarius in Canticum (Comm.Cant.)",
+              "title": "Commentarius in Canticum (Comm.Cant.)"
+            }, {
+              "value": "Contra Celsum  (Cels.)",
+              "title": "Contra Celsum  (Cels.)"
+            }, {
+              "value": "Commentarii in Genesim (Comm.Gen.)",
+              "title": "Commentarii in Genesim (Comm.Gen.)"
+            }, {
+              "value": "Commentarii in evangelium Joannis (Comm.Jo.)",
+              "title": "Commentarii in evangelium Joannis (Comm.Jo.)"
+            }, {
+              "value": "Commentarium in evangelium Matthaei (Comm.Matt.)",
+              "title": "Commentarium in evangelium Matthaei (Comm.Matt.)"
+            }, {
+              "value": "Commentarii in Romanos (Comm.Rom.)",
+              "title": "Commentarii in Romanos (Comm.Rom.)"
+            }, {
+              "value": "Commentarium series in evangelium Matthaei (Comm.ser.Matt.)",
+              "title": "Commentarium series in evangelium Matthaei (Comm.ser.Matt.)"
+            }, {
+              "value": "Diologus cum Heraclide  (Dial.)",
+              "title": "Diologus cum Heraclide  (Dial.)"
+            }, {
+              "value": "Exhortatio ad martyrium  (Mart.)",
+              "title": "Exhortatio ad martyrium  (Mart.)"
+            }, {
+              "value": "Enarrationes in Job (Enarrat.Job)",
+              "title": "Enarrationes in Job (Enarrat.Job)"
+            }, {
+              "value": "De engastrimytho  (Engastr.)",
+              "title": "De engastrimytho  (Engastr.)"
+            }, {
+              "value": "Epistula ad Africanum (Ep.Afr.)",
+              "title": "Epistula ad Africanum (Ep.Afr.)"
+            }, {
+              "value": "Epistula ad Gregorium Thaumaturgum (Ep.Greg.)",
+              "title": "Epistula ad Gregorium Thaumaturgum (Ep.Greg.)"
+            }, {
+              "value": "Epistula ad ignotum (Fabianum Romanum) (Ep.ign.)",
+              "title": "Epistula ad ignotum (Fabianum Romanum) (Ep.ign.)"
+            }, {
+              "value": "Excerpta in Psalmos (Exc.Ps.)",
+              "title": "Excerpta in Psalmos (Exc.Ps.)"
+            }, {
+              "value": "Expositio in Proverbia (Exp.Prov.)",
+              "title": "Expositio in Proverbia (Exp.Prov.)"
+            }, {
+              "value": "Fragmentum ex homiliis in Acta apostolorum (Fr.Act.)",
+              "title": "Fragmentum ex homiliis in Acta apostolorum (Fr.Act.)"
+            }, {
+              "value": "Libri x in Canticum canticorum (Fr.Cant.)",
+              "title": "Libri x in Canticum canticorum (Fr.Cant.)"
+            }, {
+              "value": "Fragmenta ex commentariis in epistulam i ad Corinthios (Fr.1Cor.)",
+              "title": "Fragmenta ex commentariis in epistulam i ad Corinthios (Fr.1Cor.)"
+            }, {
+              "value": "Fragmenta ex commentariis in epistulam ad Ephesios (Fr.Eph.)",
+              "title": "Fragmenta ex commentariis in epistulam ad Ephesios (Fr.Eph.)"
+            }, {
+              "value": "Fragmenta ex commentariis in Exodum (Fr.Exod.)",
+              "title": "Fragmenta ex commentariis in Exodum (Fr.Exod.)"
+            }, {
+              "value": "Fragmenta ex commentariis in Ezechielem (Fr.Ezech.)",
+              "title": "Fragmenta ex commentariis in Ezechielem (Fr.Ezech.)"
+            }, {
+              "value": "Fragmenta ex homiliis in epistulam ad Hebraeos (Fr.Heb.)",
+              "title": "Fragmenta ex homiliis in epistulam ad Hebraeos (Fr.Heb.)"
+            }, {
+              "value": "Fragmenta in Jeremiam (Fr.Jer.)",
+              "title": "Fragmenta in Jeremiam (Fr.Jer.)"
+            }, {
+              "value": "Fragmenta in evangelium Joannis (Fr.Jo.)",
+              "title": "Fragmenta in evangelium Joannis (Fr.Jo.)"
+            }, {
+              "value": "Fragmenta in Lamentationes (Fr.Lam.)",
+              "title": "Fragmenta in Lamentationes (Fr.Lam.)"
+            }, {
+              "value": "Fragmenta in Lucam (Fr.Luc.)",
+              "title": "Fragmenta in Lucam (Fr.Luc.)"
+            }, {
+              "value": "Fragmenta ex commentariis in evangelium Matthaei (Fr.Matt.)",
+              "title": "Fragmenta ex commentariis in evangelium Matthaei (Fr.Matt.)"
+            }, {
+              "value": "Fragmentum ex commentariis in Osee (Fr.Os.)",
+              "title": "Fragmentum ex commentariis in Osee (Fr.Os.)"
+            }, {
+              "value": "Fragmenta de principiis (Fr.Prin.)",
+              "title": "Fragmenta de principiis (Fr.Prin.)"
+            }, {
+              "value": "Fragmenta ex commentariis in Proverbia (Fr.Prov.)",
+              "title": "Fragmenta ex commentariis in Proverbia (Fr.Prov.)"
+            }, {
+              "value": "Fragmenta in Psalmos 1–150 (Fr.Ps.)",
+              "title": "Fragmenta in Psalmos 1–150 (Fr.Ps.)"
+            }, {
+              "value": "Fragmenta in librum primum Regnorum (Fr.1Reg.)",
+              "title": "Fragmenta in librum primum Regnorum (Fr.1Reg.)"
+            }, {
+              "value": "Fragmentum in Ruth (Fr.Ruth)",
+              "title": "Fragmentum in Ruth (Fr.Ruth)"
+            }, {
+              "value": "Homiliae in Psalmos (Codex Monacensis Graecus 314) (Hom.Ps.)",
+              "title": "Homiliae in Psalmos (Codex Monacensis Graecus 314) (Hom.Ps.)"
+            }, {
+              "value": "Homiliae in Isaiam (Hom.Is.)",
+              "title": "Homiliae in Isaiam (Hom.Is.)"
+            }, {
+              "value": "Hexapla (Hex.)",
+              "title": "Hexapla (Hex.)"
+            }, {
+              "value": "Homiliae in Canticum (Hom.Cant.)",
+              "title": "Homiliae in Canticum (Hom.Cant.)"
+            }, {
+              "value": "Homiliae in Exodum (Hom.Exod.)",
+              "title": "Homiliae in Exodum (Hom.Exod.)"
+            }, {
+              "value": "Homiliae in Ezechielem (Hom.Ezech.)",
+              "title": "Homiliae in Ezechielem (Hom.Ezech.)"
+            }, {
+              "value": "Homiliae in Genesim (Hom.Gen.)",
+              "title": "Homiliae in Genesim (Hom.Gen.)"
+            }, {
+              "value": "Homiliae in Jeremiam (Hom.Jer.)",
+              "title": "Homiliae in Jeremiam (Hom.Jer.)"
+            }, {
+              "value": "Homiliae in Job (Hom.Job)",
+              "title": "Homiliae in Job (Hom.Job)"
+            }, {
+              "value": "Homiliae in Judices (Hom.Judic.)",
+              "title": "Homiliae in Judices (Hom.Judic.)"
+            }, {
+              "value": "Homiliae in Leviticum (Hom.Lev.)",
+              "title": "Homiliae in Leviticum (Hom.Lev.)"
+            }, {
+              "value": "Homiliae in Lucam (Hom.Luc.)",
+              "title": "Homiliae in Lucam (Hom.Luc.)"
+            }, {
+              "value": "Homiliae in Numeros (Hom.Num.)",
+              "title": "Homiliae in Numeros (Hom.Num.)"
+            }, {
+              "value": "Homiliae in Psalmos (H.Ps.)",
+              "title": "Homiliae in Psalmos (H.Ps.)"
+            }, {
+              "value": "Homiliae in I Reges (Hom.1Reg.)",
+              "title": "Homiliae in I Reges (Hom.1Reg.)"
+            }, {
+              "value": "De oratione (Peri proseuchēs) (Or.)",
+              "title": "De oratione (Peri proseuchēs) (Or.)"
+            }, {
+              "value": "De pascha  (Pasch.)",
+              "title": "De pascha  (Pasch.)"
+            }, {
+              "value": "Philocalia (Philoc.)",
+              "title": "Philocalia (Philoc.)"
+            }, {
+              "value": "De principiis (Peri archōn) First Principles (Princ.)",
+              "title": "De principiis (Peri archōn) First Principles (Princ.)"
+            }, {
+              "value": "De resurrectione libri ii (Res.)",
+              "title": "De resurrectione libri ii (Res.)"
+            }, {
+              "value": "Scholia in Apocalypsem (Schol.Apoc.)",
+              "title": "Scholia in Apocalypsem (Schol.Apoc.)"
+            }, {
+              "value": "Scholia in Canticum canticorum (Schol.Cant.)",
+              "title": "Scholia in Canticum canticorum (Schol.Cant.)"
+            }, {
+              "value": "Scholia in Lucam (Schol.Luc.)",
+              "title": "Scholia in Lucam (Schol.Luc.)"
+            }, {
+              "value": "Scholia in Matthaeum (Schol.Matt.)",
+              "title": "Scholia in Matthaeum (Schol.Matt.)"
+            }, {
+              "value": "Selecta in Deuteronomium (Sel.Deut.)",
+              "title": "Selecta in Deuteronomium (Sel.Deut.)"
+            }, {
+              "value": "Selecta in Exodum (Sel.Exod.)",
+              "title": "Selecta in Exodum (Sel.Exod.)"
+            }, {
+              "value": "Selecta in Ezechielem (Sel.Ezech.)",
+              "title": "Selecta in Ezechielem (Sel.Ezech.)"
+            }, {
+              "value": "Selecta in Genesim (Sel.Gen.)",
+              "title": "Selecta in Genesim (Sel.Gen.)"
+            }, {
+              "value": "Selecta in Jesum Nave (Sel.Jes.Nav.)",
+              "title": "Selecta in Jesum Nave (Sel.Jes.Nav.)"
+            }, {
+              "value": "Selecta in Job (Sel.Job)",
+              "title": "Selecta in Job (Sel.Job)"
+            }, {
+              "value": "Selecta in Judices (Sel.Judic.)",
+              "title": "Selecta in Judices (Sel.Judic.)"
+            }, {
+              "value": "Selecta in Leviticum (Sel.Lev.)",
+              "title": "Selecta in Leviticum (Sel.Lev.)"
+            }, {
+              "value": "Selecta in Numeros (Sel.Num.)",
+              "title": "Selecta in Numeros (Sel.Num.)"
+            }, {
+              "value": "Selecta in Psalmos (Sel.Ps.)",
+              "title": "Selecta in Psalmos (Sel.Ps.)"
+            }
+          ]
+        }, {
+          "propName": "reference",
+          "title": "Reference",
+          "type": "text",
+          "required": true
+        }, {
+          "propName": "quotations",
+          "title": "Quotations",
+          "type": "text",
+          "array": true,
+          "required": true
+        }, {
+          "propName": "doctrines",
+          "title": "Doctrines",
+          "type": "enum",
+          "array": true,
+          "required": true,
+          "options": [{
+              "value": "Eschatology",
+              "title": "Eschatology"
+            }, {
+              "value": "Apokatastasis/Restoration",
+              "title": "Apokatastasis/Restoration"
+            }, {
+              "value": "Ages/Aeon",
+              "title": "Ages/Aeon"
+            }, {
+              "value": "Reincarnation/Metempsychosis/Metensomatosis",
+              "title": "Reincarnation/Metempsychosis/Metensomatosis"
+            }, {
+              "value": "Sin/Transgression",
+              "title": "Sin/Transgression"
+            }, {
+              "value": "Fall/Original Sin",
+              "title": "Fall/Original Sin"
+            }, {
+              "value": "Judgement",
+              "title": "Judgement"
+            }, {
+              "value": "Punishment",
+              "title": "Punishment"
+            }, {
+              "value": "Hell/Ades",
+              "title": "Hell/Ades"
+            }, {
+              "value": "Death",
+              "title": "Death"
+            }, {
+              "value": "Evil",
+              "title": "Evil"
+            }, {
+              "value": "Antichrist",
+              "title": "Antichrist"
+            }, {
+              "value": "Devil",
+              "title": "Devil"
+            }, {
+              "value": "Demons",
+              "title": "Demons"
+            }, {
+              "value": "Temptation",
+              "title": "Temptation"
+            }, {
+              "value": "Forgiveness",
+              "title": "Forgiveness"
+            }, {
+              "value": "Redemption/Justification",
+              "title": "Redemption/Justification"
+            }, {
+              "value": "Heaven/Paradise",
+              "title": "Heaven/Paradise"
+            }, {
+              "value": "Universal Salvation",
+              "title": "Universal Salvation"
+            }, {
+              "value": "Fire",
+              "title": "Fire"
+            }, {
+              "value": "Conversion",
+              "title": "Conversion"
+            }, {
+              "value": "Persecution",
+              "title": "Persecution"
+            }, {
+              "value": "Martyrdom",
+              "title": "Martyrdom"
+            }, {
+              "value": "Faith",
+              "title": "Faith"
+            }, {
+              "value": "Hope",
+              "title": "Hope"
+            }, {
+              "value": "Love",
+              "title": "Love"
+            }, {
+              "value": "Christians",
+              "title": "Christians"
+            }, {
+              "value": "Spiritual Christians",
+              "title": "Spiritual Christians"
+            }, {
+              "value": "Christians in Progress",
+              "title": "Christians in Progress"
+            }, {
+              "value": "Simple Christians",
+              "title": "Simple Christians"
+            }, {
+              "value": "Church",
+              "title": "Church"
+            }, {
+              "value": "Liturgy",
+              "title": "Liturgy"
+            }, {
+              "value": "Rule of faith",
+              "title": "Rule of faith"
+            }, {
+              "value": "Ecclesiastical Tradition",
+              "title": "Ecclesiastical Tradition"
+            }, {
+              "value": "Ecclesiastical Ministers",
+              "title": "Ecclesiastical Ministers"
+            }, {
+              "value": "Teaching",
+              "title": "Teaching"
+            }, {
+              "value": "Preaching",
+              "title": "Preaching"
+            }, {
+              "value": "Baptism",
+              "title": "Baptism"
+            }, {
+              "value": "Eucharist",
+              "title": "Eucharist"
+            }, {
+              "value": "Marriage",
+              "title": "Marriage"
+            }, {
+              "value": "Prayer",
+              "title": "Prayer"
+            }, {
+              "value": "Rational Creatures/Logikoi",
+              "title": "Rational Creatures/Logikoi"
+            }, {
+              "value": "Intelligence",
+              "title": "Intelligence"
+            }, {
+              "value": "Angel",
+              "title": "Angel"
+            }, {
+              "value": "Human being",
+              "title": "Human being"
+            }, {
+              "value": "Celestial Beings/Stars/Powers",
+              "title": "Celestial Beings/Stars/Powers"
+            }, {
+              "value": "Free will",
+              "title": "Free will"
+            }, {
+              "value": "Freedom",
+              "title": "Freedom"
+            }, {
+              "value": "Predestination",
+              "title": "Predestination"
+            }, {
+              "value": "Fate",
+              "title": "Fate"
+            }, {
+              "value": "Foreknowledge",
+              "title": "Foreknowledge"
+            }, {
+              "value": "Providence",
+              "title": "Providence"
+            }, {
+              "value": "Creation/Nature",
+              "title": "Creation/Nature"
+            }, {
+              "value": "Protology/Double Creation",
+              "title": "Protology/Double Creation"
+            }, {
+              "value": "Time",
+              "title": "Time"
+            }, {
+              "value": "Spiritual World/Noetic World",
+              "title": "Spiritual World/Noetic World"
+            }, {
+              "value": "Sensible World",
+              "title": "Sensible World"
+            }, {
+              "value": "Image and likeness",
+              "title": "Image and likeness"
+            }, {
+              "value": "Grace",
+              "title": "Grace"
+            }, {
+              "value": "Saints/Sanctification",
+              "title": "Saints/Sanctification"
+            }, {
+              "value": "Perfection",
+              "title": "Perfection"
+            }, {
+              "value": "Virtue",
+              "title": "Virtue"
+            }, {
+              "value": "Merit",
+              "title": "Merit"
+            }, {
+              "value": "Continence/Self Control",
+              "title": "Continence/Self Control"
+            }, {
+              "value": "Vices",
+              "title": "Vices"
+            }, {
+              "value": "Emotions/Passions",
+              "title": "Emotions/Passions"
+            }, {
+              "value": "Humility",
+              "title": "Humility"
+            }, {
+              "value": "Desire",
+              "title": "Desire"
+            }, {
+              "value": "Immateriality",
+              "title": "Immateriality"
+            }, {
+              "value": "Body and corporeality",
+              "title": "Body and corporeality"
+            }, {
+              "value": "Physiology/Medicine",
+              "title": "Physiology/Medicine"
+            }, {
+              "value": "Matter",
+              "title": "Matter"
+            }, {
+              "value": "Human Spirit",
+              "title": "Human Spirit"
+            }, {
+              "value": "Soul",
+              "title": "Soul"
+            }, {
+              "value": "Food/Nourishment",
+              "title": "Food/Nourishment"
+            }, {
+              "value": "Senses (Spiritual and Human)",
+              "title": "Senses (Spiritual and Human)"
+            }, {
+              "value": "Sacred Scriptures",
+              "title": "Sacred Scriptures"
+            }, {
+              "value": "Spiritual exegesis (Allegory, Psychology, Typology, Analogy, Anagogy)",
+              "title": "Spiritual exegesis (Allegory, Psychology, Typology, Analogy, Anagogy)"
+            }, {
+              "value": "Literal Exegesis",
+              "title": "Literal Exegesis"
+            }, {
+              "value": "History/Historical Events",
+              "title": "History/Historical Events"
+            }, {
+              "value": "Law",
+              "title": "Law"
+            }, {
+              "value": "Gospel",
+              "title": "Gospel"
+            }, {
+              "value": "Miracle",
+              "title": "Miracle"
+            }, {
+              "value": "Adam",
+              "title": "Adam"
+            }, {
+              "value": "Eve",
+              "title": "Eve"
+            }, {
+              "value": "Patriarchs",
+              "title": "Patriarchs"
+            }, {
+              "value": "Circumcision",
+              "title": "Circumcision"
+            }, {
+              "value": "Prophets/Prophecy",
+              "title": "Prophets/Prophecy"
+            }, {
+              "value": "Apostles/Disciples",
+              "title": "Apostles/Disciples"
+            }, {
+              "value": "Israel",
+              "title": "Israel"
+            }, {
+              "value": "Supersessionism",
+              "title": "Supersessionism"
+            }, {
+              "value": "Jews",
+              "title": "Jews"
+            }, {
+              "value": "Spiritual Geography",
+              "title": "Spiritual Geography"
+            }, {
+              "value": "Trinity",
+              "title": "Trinity"
+            }, {
+              "value": "Hypostasis",
+              "title": "Hypostasis"
+            }, {
+              "value": "Substance/Ousia",
+              "title": "Substance/Ousia"
+            }, {
+              "value": "God the Father",
+              "title": "God the Father"
+            }, {
+              "value": "Good/Goodness",
+              "title": "Good/Goodness"
+            }, {
+              "value": "God’s Will",
+              "title": "God’s Will"
+            }, {
+              "value": "Holy Spirit",
+              "title": "Holy Spirit"
+            }, {
+              "value": "God the Son",
+              "title": "God the Son"
+            }, {
+              "value": "Christ/Saviour",
+              "title": "Christ/Saviour"
+            }, {
+              "value": "Jesus as a man/Jesus' Soul",
+              "title": "Jesus as a man/Jesus' Soul"
+            }, {
+              "value": "Passion/Cross",
+              "title": "Passion/Cross"
+            }, {
+              "value": "Resurrection",
+              "title": "Resurrection"
+            }, {
+              "value": "Sacrifice",
+              "title": "Sacrifice"
+            }, {
+              "value": "Easter/Passover",
+              "title": "Easter/Passover"
+            }, {
+              "value": "Epinoiai (Aspects)",
+              "title": "Epinoiai (Aspects)"
+            }, {
+              "value": "Principle/Beginning",
+              "title": "Principle/Beginning"
+            }, {
+              "value": "Wisdom",
+              "title": "Wisdom"
+            }, {
+              "value": "Logos",
+              "title": "Logos"
+            }, {
+              "value": "Truth",
+              "title": "Truth"
+            }, {
+              "value": "Light",
+              "title": "Light"
+            }, {
+              "value": "Life",
+              "title": "Life"
+            }, {
+              "value": "Knowledge",
+              "title": "Knowledge"
+            }, {
+              "value": "Mysteries",
+              "title": "Mysteries"
+            }, {
+              "value": "Participation",
+              "title": "Participation"
+            }, {
+              "value": "Contemplation/Seeing/Vision",
+              "title": "Contemplation/Seeing/Vision"
+            }, {
+              "value": "Progress",
+              "title": "Progress"
+            }, {
+              "value": "Deification",
+              "title": "Deification"
+            }, {
+              "value": "Mysticism",
+              "title": "Mysticism"
+            }, {
+              "value": "Heresies",
+              "title": "Heresies"
+            }, {
+              "value": "Gnosticism",
+              "title": "Gnosticism"
+            }, {
+              "value": "Marcionism",
+              "title": "Marcionism"
+            }, {
+              "value": "Docetism",
+              "title": "Docetism"
+            }, {
+              "value": "Modalism/Monarchianism",
+              "title": "Modalism/Monarchianism"
+            }, {
+              "value": "Adoptionism",
+              "title": "Adoptionism"
+            }, {
+              "value": "Philosophy",
+              "title": "Philosophy"
+            }, {
+              "value": "Platonism",
+              "title": "Platonism"
+            }, {
+              "value": "Stoicism",
+              "title": "Stoicism"
+            }, {
+              "value": "Epicureanism",
+              "title": "Epicureanism"
+            }, {
+              "value": "Paganism/Pagan Gods",
+              "title": "Paganism/Pagan Gods"
+            }, {
+              "value": "Myth",
+              "title": "Myth"
+            }, {
+              "value": "Magic/Divination",
+              "title": "Magic/Divination"
+            }, {
+              "value": "Woman",
+              "title": "Woman"
+            }, {
+              "value": "Bride",
+              "title": "Bride"
+            }, {
+              "value": "Bridegroom",
+              "title": "Bridegroom"
+            }, {
+              "value": "Feminine",
+              "title": "Feminine"
+            }, {
+              "value": "Virginity",
+              "title": "Virginity"
+            }, {
+              "value": "Mary",
+              "title": "Mary"
+            }, {
+              "value": "Economy/Salvific Plan",
+              "title": "Economy/Salvific Plan"
+            }, {
+              "value": "Kingdom of God",
+              "title": "Kingdom of God"
+            }, {
+              "value": "Glory",
+              "title": "Glory"
+            }, {
+              "value": "Names",
+              "title": "Names"
+            }, {
+              "value": "Philology",
+              "title": "Philology"
+            }, {
+              "value": "Political theology",
+              "title": "Political theology"
+            }, {
+              "value": "Angel of the Nations",
+              "title": "Angel of the Nations"
+            }, {
+              "value": "Religious Pluralism/Tolerance",
+              "title": "Religious Pluralism/Tolerance"
+            }, {
+              "value": "Wealth (Riches)",
+              "title": "Wealth (Riches)"
+            }, {
+              "value": "Poverty",
+              "title": "Poverty"
+            }, {
+              "value": "Peace",
+              "title": "Peace"
+            }, {
+              "value": "Numbers",
+              "title": "Numbers"
+            }, {
+              "value": "Music",
+              "title": "Music"
+            }, {
+              "value": "Power of God",
+              "title": "Power of God"
+            }, {
+              "value": "Exhortation",
+              "title": "Exhortation"
+            }, {
+              "value": "Monotheism",
+              "title": "Monotheism"
+            }, {
+              "value": "Greek Paideia",
+              "title": "Greek Paideia"
+            }, {
+              "value": "Temple",
+              "title": "Temple"
+            }, {
+              "value": "Repentance",
+              "title": "Repentance"
+            }, {
+              "value": "Idolatry",
+              "title": "Idolatry"
+            }, {
+              "value": "Doctrine",
+              "title": "Doctrine"
+            }, {
+              "value": "Invocation",
+              "title": "Invocation"
+            }, {
+              "value": "Furta Graecorum",
+              "title": "Furta Graecorum"
+            }, {
+              "value": "Immutability",
+              "title": "Immutability"
+            }, {
+              "value": "Confession",
+              "title": "Confession"
+            }, {
+              "value": "Incarnation",
+              "title": "Incarnation"
+            }, {
+              "value": "Violence",
+              "title": "Violence"
+            }, {
+              "value": "Happiness",
+              "title": "Happiness"
+            }, {
+              "value": "Sex",
+              "title": "Sex"
+            }
+          ]
+        }, {
+          "propName": "relatedQuotations",
+          "title": "Related Quotations",
+          "type": "text",
+          "array": true
+        }
+      ]
+    }
+  ]
+}
