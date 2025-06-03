@@ -39,7 +39,7 @@
     $effect(() => {
         graphState;
 
-        alert('rerendering')
+        alert('now in version 0.0.2')
 
         render();
     })
