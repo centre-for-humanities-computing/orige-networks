@@ -1,9 +1,10 @@
 <script>
     import Graph from "graphology";
 
-    import { onMount, setContext } from "svelte";
+    import { getContext, onMount, setContext } from "svelte";
     import { browser } from "$app/environment";
     import PanelContainer from "$lib/client/PanelContainer.svelte";
+    import { CONTEXT } from "$lib/utils/constants.js";
 
     let { data } = $props();
 
@@ -12,14 +13,22 @@
 
     let availableData = data.availableData;
 
-    $inspect(availableData);
+    // $inspect(availableData);
 
+    /** @type {GraphState} */
     let graphState = $state({
-        selectedWorks: ["hello"]
+        selectedNodeID: null,
+        query: {
+            queryStr: "",
+            filters: []
+        },
+        filteredNodeIDs: []
     });
 
-    setContext('graphState', graphState);
-    setContext('availableData', availableData)
+    setContext(CONTEXT.GRAPH_STATE, graphState);
+    setContext(CONTEXT.AVAILABLE_DATA, availableData)
+
+    let resolveURL = getContext(CONTEXT.RESOLVE_URL);
 
     /** @type {HTMLDivElement} */
     let container;
@@ -39,7 +48,7 @@
     $effect(() => {
         graphState;
 
-        alert('now in version 0.0.2')
+        console.log($state.snapshot(graphState));
 
         render();
     })
@@ -67,8 +76,9 @@
 </script>
 
 <h1>Welcome to Orige.net</h1>
-<button onclick={() => graphState.selectedWorks.push('test')}>Klik</button>
 <p>Edges: {graph.edges().length}. Nodes: {graph.nodes().length}</p>
+
+<p>Go to <a href={resolveURL("/about")}>ABOUT</a></p>
 
 <div id="sigma-container" bind:this={container}></div>
 

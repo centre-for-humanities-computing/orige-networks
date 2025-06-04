@@ -14,7 +14,7 @@
 <div class="panel">
     <div class="panel-header">
         <h2>{header}</h2>
-        <button onclick={toggleCollapse}>Show more</button>
+        <button onclick={toggleCollapse}>{isCollapsed ? 'Show' : 'Hide'}</button>
     </div>
     <div
             class="panel-content"
@@ -26,7 +26,7 @@
 
 <style>
     .panel {
-        background-color: #eeeee4;
+        background-color: #eeeee4dd;
         border-radius: 5px;
         padding: 5px;
         border: 1px solid #21130d;

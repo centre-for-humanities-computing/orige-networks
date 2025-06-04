@@ -2,15 +2,18 @@
     import Panel from "$lib/client/Panel.svelte";
     import FilterList from "$lib/client/FilterList.svelte";
     import { getContext } from "svelte";
+    import { CONTEXT } from "$lib/utils/constants.js";
 
-    let availableData = getContext('availableData');
+    let availableData = getContext(CONTEXT.AVAILABLE_DATA);
+    let graphState = getContext(CONTEXT.GRAPH_STATE);
 
-    console.log()
-
+    let queryStr = graphState.query.queryStr;
+    
 </script>
 <div class="panel-container">
     <Panel header="Search">
-        <input type="text">
+        <input type="text" bind:value={queryStr}>
+        <button onclick={() => graphState.query.queryStr = queryStr}>Search</button>
     </Panel>
 
     <Panel header="Works">

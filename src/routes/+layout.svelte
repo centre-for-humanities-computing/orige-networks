@@ -1,6 +1,23 @@
 <script>
 
+ import { base } from '$app/paths';
+ import { setContext } from "svelte";
+ import { CONTEXT } from "$lib/utils/constants.js";
+
  let { children } = $props();
+
+ /**
+  * Resolves a path
+  * @param {string} path
+  */
+ function resolveURL(path) {
+  if (base === "") {
+   return path;
+  }
+  return `${base}/${path}`;
+ }
+
+ setContext(CONTEXT.RESOLVE_URL, resolveURL);
 
 </script>
 
