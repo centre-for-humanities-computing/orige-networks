@@ -5,27 +5,37 @@
     import { CONTEXT } from "$lib/utils/constants.js";
 
     let facets = getContext(CONTEXT.FACETS);
-    let graphState = getContext(CONTEXT.GRAPH_STATE);
+    let queryState = getContext(CONTEXT.QUERY_STATE);
 
-    let queryStr = graphState.query.queryStr;
+    let queryStr = queryState.queryStr;
     
 </script>
 <div class="panel-container">
     <Panel header="Search" startCollapsed={false}>
+        <p class="small collapse-margin-vertical"> Search by work reference name or quotation, e.g., "Hum.Jes.Nav." or "Luke 13"</p>
         <input type="text" bind:value={queryStr}>
-        <button onclick={() => graphState.query.queryStr = queryStr}>Search</button>
+        <button onclick={() => queryState.queryStr = queryStr}>Search</button>
     </Panel>
 
     <Panel header="Works">
-        <FilterList facetOptions={facets.works}/>
+        <FilterList
+                facetOptions={facets.works}
+                type="work"
+        />
     </Panel>
 
     <Panel header="Doctrines">
-        <FilterList facetOptions={facets.doctrines}/>
+        <FilterList
+                facetOptions={facets.doctrines}
+                type="doctrine"
+        />
     </Panel>
 
     <Panel header="Referenced works">
-        <p>Dummy text</p>
+        <FilterList
+            facetOptions={facets.quotedReferences}
+            type="references"
+        />
     </Panel>
 
 </div>
