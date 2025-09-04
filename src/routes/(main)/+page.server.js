@@ -1,9 +1,8 @@
-import { graph, facets, nodeIDs } from "$lib/server/app.js";
+import { graphModel } from "$lib/server/app.js";
 
 export function load() {
     return {
-        exportedGraph: graph.export(),
-        facets,
-        nodeIDs
+        serializedGraph: graphModel.graph.export(),
+        allFacets: graphModel.getFacets()
     };
 }
