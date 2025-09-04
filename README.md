@@ -53,3 +53,8 @@ The deployment workflow will be triggered automatically on git tags to the repos
 where `x` is one or more digits ([SemVer](https://semver.org/)). The workflow can also be triggered manually on the GitHub repository ("Actions" tab).
 
 When triggered, the workflow builds the project and uploads the resulting build _artifact_ to the GitHub Page for the project.
+
+## User guide
+### Editing 'about' and 'glossaries'
+
+These files are in a Markdown format (https://www.markdownguide.org/). The can be found and edited as text under `/lib/server/assets/`.
