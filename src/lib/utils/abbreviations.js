@@ -309,10 +309,20 @@ export const fullReferenceToAbbreviation = new Map(abbreviations.map(abbr => {
     return [abbr.work, abbr.abbreviation];
 }));
 
+/**
+ * A map from abbreviations to full biblical reference names
+ * @type {Map<string, string>}
+ */
 export const abbreviationToFullReference = new Map(abbreviations.map(abbr => {
     return [abbr.abbreviation, abbr.work];
 }));
 
+/**
+ * Strips paragraph numbers and spaces from 'short' quotation references
+ * @param {string} abbreviation
+ * @return {string}
+ */
 export function stripParagraphFromAbbreviation(abbreviation) {
-    return abbreviation.split(' ')[0];
+    let trimmedAbbreviation = abbreviation.trim();
+    return trimmedAbbreviation.split(' ')[0];
 }
