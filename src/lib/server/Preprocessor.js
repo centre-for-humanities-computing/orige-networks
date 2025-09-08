@@ -30,11 +30,22 @@ import {
  */
 
 /**
- * @typedef FacetObject
+ * @typedef FacetMapObject
  * @prop {Map<string, number>} works
  * @prop {Map<string, number>} referencedWorks
  * @prop {Map<string, number>} doctrines
  */
+
+/** @typedef Facet
+ * @prop {string} key
+ * @prop {number} count
+ */
+
+/** @typedef FacetListObject
+ * @prop {Facet[]} works
+ * @prop {Facet[]} doctrines
+ * @prop {Facet[]} quotedReferences
+ * */
 
 class Preprocessor {
     /** @type {Map<string|number, NodeObject>} */
@@ -43,7 +54,7 @@ class Preprocessor {
     /** @type {EdgeObject[]} */
     #edges = [];
 
-    /** @type FacetObject */
+    /** @type FacetMapObject */
     #facets = {
         works: new Map(),
         referencedWorks: new Map(),
@@ -59,7 +70,7 @@ class Preprocessor {
      * @return {{
      * nodes: NodeObject[],
      * edges: EdgeObject[],
-     * facets: {works: {key: string, count: number}[], doctrines: {key: string, count: number}[], quotedReferences: {key: string, count: number}[]},
+     * facets: FacetListObject,
      * errors: { type: string, entryID: number, error: string }[]
      * }}
      */
@@ -190,7 +201,7 @@ class Preprocessor {
 
     /**
      * Gets all facets (as sorted arrays)
-     * @return {{works: {key: string, count: number}[], doctrines: {key: string, count: number}[], quotedReferences: {key: string, count: number}[]}}
+     * @return {FacetListObject}
      */
     getAllFacets() {
         let works = this.#getSortedFacetFilters(this.#facets.works);
