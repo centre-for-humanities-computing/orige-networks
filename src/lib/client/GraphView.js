@@ -31,8 +31,8 @@ class GraphView {
      * @enum {number}
      */
     static LAYOUT = {
-        ITERATIONS: 50,
-        GRAVITY: 10
+        ITERATIONS: 500,
+        GRAVITY: 12
     }
 
     /** @type {import('graphology').default} */
@@ -49,18 +49,32 @@ class GraphView {
     /**
      * Inits the graph view using default layout configuration
      * @param {boolean} randomized - Whether to randomize the initial layout before applying force
+     * @param {boolean} inferSettings - Whether to let Graphology infer ForceAtlas2 settings from graph
      */
-    init(randomized = true) {
+    init(randomized = true, inferSettings = true) {
         if (randomized) {
+            console.log('Assigning random starting positions for nodes.');
             random.assign(this.#graph);
         }
 
-        forceAtlas2.assign(this.#graph, {
-            iterations: GraphView.LAYOUT.ITERATIONS,
-            settings: {
-                gravity: GraphView.LAYOUT.GRAVITY
-            }
-        });
+        console.log('Calculating positions based on ForceAtlas2 algorithm');
+        if (inferSettings) {
+            console.log('Inferring settings from graph data...')
+            const inferredSettings = forceAtlas2.inferSettings(this.#graph);
+            forceAtlas2.assign(this.#graph, {
+                iterations: GraphView.LAYOUT.ITERATIONS,
+                settings: inferredSettings
+            })
+        } else {
+            console.log('Using default settings...')
+            forceAtlas2.assign(this.#graph, {
+                iterations: GraphView.LAYOUT.ITERATIONS,
+                settings: {
+                    gravity: GraphView.LAYOUT.GRAVITY
+                }
+            });
+        }
+
     }
 
     /**
@@ -97,11 +111,16 @@ class GraphView {
      * Gets the default node size from type
      * @param {string} id
      * @param {string} type
+     * @param {function} ratio
      * @return {GraphView.SIZE|number}
      */
-    getNodeSizeFromType(id, type) {
+    getNodeSizeFromType(id, type, ratio = null) {
         if (type === 'quotedWork') {
-            return clamp(this.#graph.degree(id), GraphView.SIZE.MIN, GraphView.SIZE.MAX);
+            if (ratio) {
+                return mapRange(ratio, GraphView.SIZE.MIN, GraphView.SIZE.MAX)
+            } else {
+                return clamp(this.#graph.degree(id), GraphView.SIZE.MIN, GraphView.SIZE.MAX);
+            }
         }
         return GraphView.SIZE.MIN;
     }
@@ -122,6 +141,11 @@ function clamp(num, min, max) {
         return max;
     }
     return num;
+}
+
+function mapRange(ratio, toMin, toMax) {
+
+    return (toMax - toMin) * ratio + toMin;
 }
 
 export { GraphView }
