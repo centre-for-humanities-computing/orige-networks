@@ -1,62 +1,130 @@
 <script>
 
-    import { getContext, onMount, setContext } from "svelte";
+    import { getContext, onMount, setContext, untrack } from "svelte";
     import { browser } from "$app/environment";
-    import PanelContainer from "$lib/client/components/PanelContainer.svelte";
-    import Panel from "$lib/client/components/Panel.svelte";
     import { CONTEXT } from "$lib/utils/constants.js";
 
-    import { isNotNullNotEmptyString } from "$lib/utils/helpers.js";
-    import { GraphViewModel } from "$lib/client/GraphViewModel.js";
     import Graph from "graphology";
     import { GraphView } from "$lib/client/GraphView.js";
+    import { GraphViewModel } from "$lib/client/GraphViewModel.js";
+    import PanelContainer from "$lib/client/components/PanelContainer.svelte";
+    import Panel from "$lib/client/components/Panel.svelte";
 
     let { data } = $props();
     let graphViewModel = new GraphViewModel(Graph.from(data.serializedGraph), data.allFacets);
 
-    let currentSelection = $state(null);
+    /** @type {Set<string>} */
+    const allNodes = graphViewModel.getNodeIDSet();
 
+    /**
+     * @typedef Filter
+     * @prop {string} type
+     * @prop {string} value
+     */
+
+    /**
+     * @typedef QueryState
+     * @prop {string} queryString
+     * @prop {Filter[]} filters
+     */
+
+    /**
+     * @type {QueryState}
+     */
     let queryState = $state({
         queryString: "",
         filters: []
     });
 
-    /** @type {GraphState} */
-    let graphState = $state({
-        // renderedNodeIDs: new Set(graphViewModel.graph.nodes()),
-        hiddenNodes: null, // TODO
-        fadedNodes: null, // TODO
-        highlightedNodes: null, // TODO
+    let filterListUI = $derived.by(() => {
+        function getStringFromType(type) {
+            return queryState.filters.filter(f => f.type === type).map(f => f.value).join(', ')
+        }
+
+        return {
+            works: getStringFromType('work'),
+            doctrines: getStringFromType('doctrine'),
+            references: getStringFromType('reference')
+        }
     });
 
+    /**
+     * @typedef GraphViewState
+     * @prop {Set<string>} hiddenNodes
+     * @prop {Set<string>} fadedNodes
+     * @prop {Set<string>} highlightedNodes
+     * @prop {boolean} highlightRelated
+     * @prop {boolean} showHiddenNeighbors
+     */
+
+    /**
+     * @type {GraphViewState}
+     */
+    let graphViewState = $state({
+        hiddenNodes: new Set(),
+        fadedNodes: new Set(),
+        highlightedNodes: new Set(),
+        highlightRelated: false,
+        showHiddenNeighbors: false
+    });
+
+    $inspect(graphViewState)
+
+    let renderedNodes = $derived.by(() => {
+       return allNodes.difference(graphViewState.hiddenNodes);
+    });
+
+    /** @type {string|null} */
+    let currentSelection = $state(null);
+
+    /** @type {{data: NodeObject, doctrines: string[], neighbors: Set<string>}|null} */
     let selectedNodeDetails = $derived.by(() => {
-        let nodeID = currentSelection;
-        if (nodeID === null) {
+        if (currentSelection === null) {
             return null;
         }
-        let data = graphViewModel.graph.getNodeAttribute(nodeID, 'data');
 
-        let allDoctrines = graphViewModel.graph.mapEdges(nodeID, (edge, attr) => {
-            console.log(attr)
-            return attr.data.doctrines;
-        }).flat();
-        let uniqueDoctrines = new Set(allDoctrines);
-
-        let doctrines = Array.from(uniqueDoctrines);
-        return {
-            data,
-            doctrines
-        }
+        return graphViewModel.getDetailsFromNodeID(currentSelection);
     });
 
+    /**
+     * Util function to add a node to a set
+     * @param {string[]} nodes
+     * @param {Set<string>} set
+     */
+    function addNodesToSet(nodes, set) {
+        for (let node of nodes) {
+            set.add(node);
+        }
+    }
+
+    /**
+     * Clears the current query state
+     */
     function clearQueryState() {
         queryState.queryString = '';
         queryState.filters = [];
     }
 
+    /**
+     * Clears the current graph view state
+     */
+    function clearGraphViewState() {
+        graphViewState.hiddenNodes.clear();
+        clearFadedViewState();
+        clearHighlightedViewState()
+    }
+
+    function clearHighlightedViewState() {
+        graphViewState.highlightedNodes.clear();
+    }
+
+    function clearFadedViewState() {
+        graphViewState.fadedNodes.clear();
+    }
+
     // Global context
     setContext(CONTEXT.QUERY_STATE, queryState);
-    setContext(CONTEXT.GRAPH_STATE, graphState);
+    setContext(CONTEXT.GRAPH_STATE, graphViewState);
     setContext(CONTEXT.FACETS, graphViewModel.getFacets());
 
     let resolveURL = getContext(CONTEXT.RESOLVE_URL);
@@ -78,16 +146,24 @@
             // Instantiate sigma.js and render the graphModel
             sigma = new Sigma(graphViewModel.graph, container, { zIndex: true, allowInvalidContainer: true });
 
+            // Creates and inserts a new layer between graph
+
             /**
              * A handler for click events
+             * @param {SigmaNodeEventPayload} event
              */
             function nodeClickedHandler(event) {
+                clearHighlightedViewState();
                 currentSelection = event.node; // graphModel.getNodeAttribute(nodeID, 'data') === null ? null : nodeID;
-                clearQueryState();
             }
 
+            /**
+             *
+             * @param {SigmaEventPayload} event
+             */
             function stageClickHandler(event) {
                 currentSelection = null;
+                clearHighlightedViewState();
             }
 
             // Adds handler for node clicks
@@ -100,44 +176,100 @@
 
     // Effect for text and filter queries
     $effect(() => {
-        queryState;
-        graphState;
+        queryState.queryString;
+        queryState.filters.length;
+        graphViewState.showHiddenNeighbors;
 
-        console.log('rendering triggered')
+        untrack(() => {
+            console.log('rendering triggered')
 
-        let matches = applySearch();
+            let matches = applySearch();
 
+            if (graphViewState.showHiddenNeighbors) {
+                let neighbors = new Set();
+                for (let match of matches) {
+                    graphViewModel.graph.forEachNeighbor(match, (neighbor, attributes) => {
+                        neighbors.add(neighbor);
+                    });
+                }
+                matches = matches.union(neighbors);
+            }
 
+            graphViewState.hiddenNodes = allNodes.difference(matches);
 
-        render(renderableNodes, highlightedNodes);
+            render();
+        })
     });
 
-    // Effect for clicking a single node
+    // Effect for clicking or unclicking a single node
     $effect(() => {
-        graphState.selectedNodeID;
+        currentSelection;
+        graphViewState.highlightedNodes;
+        graphViewState.highlightRelated;
 
-        let highlightedNodes = new Set();
-        if (graphState.selectedNodeID) {
-            highlightedNodes.add(graphState.selectedNodeID);
-            graphViewModel.graph.forEachNeighbor(graphState.selectedNodeID, (neighbor, attributes) => highlightedNodes.add(neighbor));
-        }
+        untrack(() => {
+            clearHighlightedViewState();
+            clearFadedViewState();
+            if (currentSelection === null) {
+                render();
+                return;
+            }
+
+            graphViewState.highlightedNodes.add(currentSelection);
+
+            let shown = new Set();
+            shown.add(currentSelection);
+            let neighbors = new Set();
+
+            // Show immediate neighbors
+            graphViewModel.graph.forEachNeighbor(currentSelection, (neighbor, attributes) => {
+                neighbors.add(neighbor);
+                shown.add(neighbor);
+            });
+
+            if (graphViewState.highlightRelated) {
+                // Show neighbors of depth 2
+                for (let neighbor of neighbors) {
+                    graphViewModel.graph.forEachNeighbor(neighbor, (adjecentNeighbor, attributes) => {
+                        shown.add(adjecentNeighbor);
+                    });
+                }
+            }
+
+            graphViewState.fadedNodes = allNodes.difference(shown);
+
+            render();
+        })
     })
 
+    function applySearch() {
+        currentSelection = null;
 
-    function render(hidden, highlighted, faded) {
+        let { queryString, filters } = $state.snapshot(queryState);
+        let results = graphViewModel.search(queryString, filters)
+        console.log(results)
+
+        return results.resultSet;
+
+    }
+
+    /**
+     * Renders the graph view state
+     */
+    function render() {
         if (!sigma) {
             return;
         }
 
         // nodeReducer and edgeReducer callback params vary from the documentation. :-(
         sigma.setSetting('nodeReducer', (id, node) => {
-            if (hidden.has(id)) {
+            if (graphViewState.hiddenNodes.has(id)) {
                 return {
                     ...node,
                     hidden: true
                 };
             }
-            if (highlighted.has(id)) {
+            if (graphViewState.highlightedNodes.has(id)) {
                 return {
                     ...node,
                     color: GraphView.COLORS.HIGHLIGHT,
@@ -145,27 +277,60 @@
                     zIndex: 99
                 }
             }
-            if (faded.has(id)) {
+            if (graphViewState.fadedNodes.has(id)) {
                 return {
                     ...node,
                     color: GraphView.COLORS.FADE,
-                    label: null
+                    label: null,
+                    zIndex: 1
                 }
             }
 
-            return node;
+            return {
+                ...node,
+                zIndex: 10
+            };
         });
 
         sigma.setSetting('edgeReducer', (id, edge) => {
-            let extremities = graphViewModel.graph.extremities(id);
-            if (highlighted.has(extremities[0]) && highlighted.has(extremities[1])) {
+            if (currentSelection === null) {
+                return edge;
+            }
+
+            function edgeHasFadedExtremityNode(edgeID) {
+                let nodes = graphViewModel.graph.extremities(edgeID);
+
+                return (graphViewState.fadedNodes.has(nodes[0]) || graphViewState.fadedNodes.has(nodes[1]));
+            }
+
+            function edgeHasHighlightedExtremityNode(edgeID) {
+                let nodes = graphViewModel.graph.extremities(edgeID);
+
+                return graphViewState.highlightedNodes.has(nodes[0]) || graphViewState.highlightedNodes.has(nodes[1]);
+            }
+
+            if (edgeHasHighlightedExtremityNode(id)) {
                 return {
                     ...edge,
                     color: GraphView.COLORS.HIGHLIGHT,
                     zIndex:99
                 }
             }
-            return edge;
+
+            if (edgeHasFadedExtremityNode(id)) {
+                return {
+                    ...edge,
+                    hidden: true
+                }
+            }
+
+            return {
+                ...edge,
+                color: GraphView.COLORS.HIGHLIGHT,
+                zIndex:99
+            }
+
+
 
         })
 
@@ -175,126 +340,74 @@
         sigma.scheduleRender(); // (https://www.sigmajs.org/docs/advanced/lifecycle#manual-rendering-triggers)
     }
 
-    function applySearch() {
-        currentSelection = null;
-
-        console.log(queryState)
-        let results = graphViewModel.search(queryState.queryString)
-        console.log(results)
-
-        return results.resultSet;
-
-/*
-        if (queryStr.length > 0) {
-            let { matches, neighbors } = searchByQueryString(queryStr);
-
-            searchResults = matches.union(neighbors);
-        } else {
-            searchResults = allNodes;
-        }
-
-        if (queryState.filters.length > 0) {
-            searchResults = applyFilters(searchResults, $state.snapshot(queryState.filters));
-        }
-
-        return searchResults;
-
- */
-    }
-
-    function applyFilters(nodes, filters) {
-        let res = new Set();
-        for (let filter of filters) {
-            for (let nodeID of nodes) {
-                if (filterMatchesNode(filter, nodeID)) {
-                    res.add(nodeID);
-                }
-            }
-        }
-        return res;
-    }
-
-    function filterMatchesNode(filter, nodeID) {
-        let data = graphViewModel.graph.getNodeAttribute(nodeID, 'data');
-
-        if (data) {
-            if (filter.type === 'work' && data.work === filter.value) {
-                return true;
-            }
-            if (filter.type === 'doctrine' && data.doctrines.includes(filter.value)) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    function searchByQueryString(queryStr) {
-        let matches = new Set();
-        let neighbors = new Set();
-        for (let node of graphViewModel.graph.nodes()) {
-            if (node.includes(queryStr)) {
-                matches.add(node);
-                graphViewModel.graph.forEachNeighbor(node, neighbor => neighbors.add(neighbor));
-            }
-        }
-        return {
-            matches,
-            neighbors
-        };
-    }
-
-    function getNeighborsFromNodeID(nodeID) {
-        return graphViewModel.graph.mapNeighbors(graphState.selectedNodeID, (neighbor, attributes) => {
-            console.log(attributes)
-            return {
-                neighborID: neighbor,
-                // doctrines: attributes.data?.doctrines ?? []
-            }
-        });
-    }
-
-    function getFullWorkFromAbbreviation(abbreviation) {
-        let ref = /^[A-Za-z0-9]+ [0-9.:]+$/;
-        let match = ref.exec(abbreviation);
-        console.log(abbreviation)
-        console.log(match);
-
-        if (isNotNullNotEmptyString(abbreviation)) {
-            return getFullReferenceFromAbbr.get(abbreviation);
-        }
-        return 'No reference available';
-    }
 
 </script>
 
 {#snippet info(title, text)}
     <div>
         <p class="details-key">{title}</p>
-        <p class="details-value">{text ?? '—'}</p>
+        <p class="details-value">{text.trim().length > 0 ? text : 'None'}</p>
     </div>
 {/snippet}
 
 <div id="sigma-container" bind:this={container}></div>
 
-<div id="details-panel" class:hidden={!graphState.selectedNodeID}>
+<div id="details-panel" class:hidden={!currentSelection}>
+    {#if currentSelection && selectedNodeDetails}
     <Panel
-            header={selectedNodeDetails?.reference}
+            header={selectedNodeDetails.data.reference}
             isCollapsible={false}
     >
-        {@render info("Work", selectedNodeDetails?.work)}
-        {@render info("Reference", selectedNodeDetails?.reference)}
-        {@render info("ID", graphState.selectedNodeID)}
-        {@render info("Doctrines", selectedNodeDetails?.doctrines?.join(', '))}
+        <input type="checkbox" id="show-additional-neighbors" bind:checked={graphViewState.highlightRelated}/>
+        <label for="show-additional-neighbors">Highlight related references</label>
+        {@render info("Work", selectedNodeDetails.data.work)}
+        {@render info("Reference", selectedNodeDetails.data.reference)}
+        {@render info("ID", currentSelection)}
+        {@render info("Doctrines", selectedNodeDetails.doctrines.join(', '))}
 
+        {#if selectedNodeDetails.data.type === "main"}
+            {@render info("Biblical quotations", Array.from(selectedNodeDetails.neighbors).join(', '))}
+        {:else}
+            {@render info("Referencing passages", Array.from(selectedNodeDetails.neighbors).map(nodeID => graphViewModel.getWorkFromNodeID(nodeID)).join(', '))}
+        {/if}
 
     </Panel>
+    {/if}
 </div>
 
 <PanelContainer />
 
+<div id="extra-panel">
+    <Panel
+            header=""
+            isCollapsible={false}
+        >
+        <p class="italic">Nodes: {graphViewModel.getMetadataForDataset().totalNodes} ({graphViewModel.getMetadataForDataset().totalNodes - graphViewState.hiddenNodes.size} shown).</p>
+        {#if queryState.filters.length > 0}
+            <p>Applied filters:</p>
+            <ul>
+                {#if filterListUI.works.length > 0}
+                    <li>Works: <em>{filterListUI.works}</em></li>
+                {/if}
+                {#if filterListUI.doctrines.length > 0}
+                    <li>Doctrines: <em>{filterListUI.doctrines ?? '—'}</em></li>
+                {/if}
+                {#if filterListUI.references.length > 0}
+                    <li>References: <em>{filterListUI.references}</em></li>
+                {/if}
+            </ul>
+        {/if}
+        {#if graphViewState.hiddenNodes.size > 0}
+            <div>
+                <input type="checkbox" id="show-hidden-neighbors" bind:checked={graphViewState.showHiddenNeighbors}>
+                <label for="show-hidden-neighbors">Show hidden neighbors</label>
+            </div>
+        {/if}
+    </Panel>
+</div>
+
 <footer id="footer">
-    <p class="italic">Nodes: {graphViewModel.getMetadataForDataset().totalNodes}. Edges: {graphViewModel.getMetadataForDataset().totalEdges}.</p>
+
 </footer>
 
 <style>
@@ -318,6 +431,13 @@
 
     .italic {
         font-style: italic;
+    }
+
+    #extra-panel {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        margin: 15px;
     }
 
     #details-panel {
