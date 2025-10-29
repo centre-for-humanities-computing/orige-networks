@@ -86,6 +86,12 @@ class GraphViewModel {
         return false;
     }
 
+    /**
+     * Whether a node matches one or more filters in the list
+     * @param {string} nodeID
+     * @param {Filter[]} filters
+     * @return {boolean}
+     */
     #nodeMatchesFilterList(nodeID, filters) {
         let data = this.graph.getNodeAttribute(nodeID, 'data');
 
@@ -114,9 +120,13 @@ class GraphViewModel {
         }
     }
 
+    /**
+     * Retrieves the title of the work (Origen or biblical) from the node ID
+     * @param {string} nodeID
+     * @return {string}
+     */
     getWorkFromNodeID(nodeID) {
         let data = this.graph.getNodeAttribute(nodeID, 'data');
-
         return data.reference;
     }
 
@@ -138,7 +148,7 @@ class GraphViewModel {
     }
 
     /**
-     * All neighbors belonging to the node
+     * Gets all neighbors belonging to the node
      * @param {string} nodeID
      * @return {string[]}
      */
