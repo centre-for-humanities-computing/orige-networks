@@ -1,3 +1,4 @@
+/** @type {{ work: string, abbreviation: string }[]} */
 let abbreviations = [
     {
         work: 'Genesis',
@@ -304,10 +305,6 @@ let abbreviations = [
         abbreviation: 'Rev'
     }
 ];
-
-export const fullReferenceToAbbreviation = new Map(abbreviations.map(abbr => {
-    return [abbr.work, abbr.abbreviation];
-}));
 
 /**
  * A map from abbreviations to full biblical reference names
