@@ -117,10 +117,6 @@ a:hover {
     margin-top: var(--small-gap);
 }
 
-.panel-content.collapsed {
-    display: none;
-}
-
 /* Everything related to search and filter UI */
 
 #search-filter-panel-container {
@@ -147,6 +143,8 @@ a:hover {
     box-shadow: var(--drop-shadow-color) 1px 1px;
     max-height: 20vh;
     overflow: scroll;
+    position: absolute;
+    width: calc(100vw - var(--small-gap)*2);
 }
 
 .details-key {
