@@ -42,9 +42,6 @@ The following data is passed on to the client side on a page load:
 - A `facets` object containing information about possible filters
 - A `Set` of all node ids (currently not used; might be removed later)
 
-### Future developments
-Re-implement as directed graph.
-
 ## Deployment
 The application is built and rendered server-side to be deployed via GitHub Pages. Therefore, no other hosting is necessary.
 To enable this, a deployment workflow for GitHub Actions is located in `./.github/workflows/deploy.yml`.
@@ -57,4 +54,5 @@ When triggered, the workflow builds the project and uploads the resulting build 
 ## User guide
 ### Editing 'about' and 'glossaries'
 
-These files are in a Markdown format (https://www.markdownguide.org/). The can be found and edited as text under `/lib/server/assets/`.
+These files are in a Markdown format
+(https://www.markdownguide.org/). They can be found and edited as markdown-formatted text under `/lib/server/assets/`.
