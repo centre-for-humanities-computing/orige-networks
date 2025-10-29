@@ -29,30 +29,4 @@
   <a href={resolveURL("/about")}>About</a>
  </div>
 </nav>
-
- <div>
   {@render children()}
- </div>
-
-<style>
- :root {
-     font-family: "Helvetica Neue", sans-serif;
-     font-size: 0.9rem;
-     color: #21130d;
- }
- nav {
-     z-index: 999;
-     display: flex;
-     background-color: #ffffff;
-     width: fit-content;
-     padding: 0.3em;
-     border-radius: 0.3em;
- }
- .nav-item {
-     padding-inline: 10px;
-     border-right: 1px solid var(--dark-brown);
- }
- .nav-item:last-child {
-     border: none;
- }
-</style>
