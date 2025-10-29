@@ -15,29 +15,32 @@ class GraphModel {
 
     /**
      * Creates a new graph model instance
-     * @param {NodeObject[]} nodes
-     * @param {EdgeObject[]} edges
-     * @param {FacetListObject} facets
+     * @param {Graph|{ nodes: NodeObject[], edges: EdgeObject[]}} data - Can be either a Graph instance or lists of node and edge objects
+     * @param {FacetListObject} facets - Available facets for filtering
      */
-    constructor(nodes, edges, facets) {
-        this.graph = new Graph({ multi: true, type: "directed" });
-        this.#graphView = new GraphView(this.graph);
+    constructor(data, facets) {
+        if (data instanceof Graph) {
+            this.graph = data;
+        } else {
+            this.graph = new Graph({ multi: true, type: "directed" });
+            this.#graphView = new GraphView(this.graph);
 
-        for (let node of nodes) {
-            this.graph.addNode(node.id, {
-                label: node.reference ?? node.id,
-                x: this.#graphView.getDefaultXPos(),
-                y: this.#graphView.getDefaultYPos(),
-                color: this.#graphView.getNodeColorFromType(node.type),
-                size: GraphView.SIZE.MIN,
-                data: node
-            });
-        }
+            for (let node of data.nodes) {
+                this.graph.addNode(node.id, {
+                    label: node.reference ?? node.id,
+                    x: this.#graphView.getDefaultXPos(),
+                    y: this.#graphView.getDefaultYPos(),
+                    color: this.#graphView.getNodeColorFromType(node.type),
+                    size: GraphView.SIZE.MIN,
+                    data: node
+                });
+            }
 
-        for (let edge of edges) {
-            this.graph.addEdge(edge.fromId, edge.toId, {
-                data: edge
-            });
+            for (let edge of data.edges) {
+                this.graph.addEdge(edge.fromId, edge.toId, {
+                    data: edge
+                });
+            }
         }
 
         this.#facets = facets;
