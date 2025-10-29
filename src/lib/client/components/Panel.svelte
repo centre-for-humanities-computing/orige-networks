@@ -25,9 +25,7 @@
             </button>
         {/if}
     </div>
-    <div
-            class="panel-content"
-    >
+    <div class="panel-content">
         {#if !isCollapsed}
             {@render children()}
         {/if}
