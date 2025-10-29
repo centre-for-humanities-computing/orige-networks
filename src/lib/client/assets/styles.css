@@ -99,8 +99,13 @@ a:hover {
 .panel-header > button {
     height: fit-content;
     justify-self: end;
-    align-self: start;
+}
+
+.panel-header > .radio-mode-container {
+    display: flex;
+    gap: var(--small-gap);
     margin-left: auto;
+
 }
 
 .fancy-button {
@@ -142,7 +147,7 @@ a:hover {
     background-color: var(--panel-color);
     box-shadow: var(--drop-shadow-color) 1px 1px;
     max-height: 20vh;
-    overflow: scroll;
+    overflow-y: scroll;
     position: absolute;
     width: calc(100vw - var(--small-gap)*2);
 }
