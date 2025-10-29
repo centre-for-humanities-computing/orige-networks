@@ -7,7 +7,7 @@ import Graph from "graphology";
 import { GraphModel } from "$lib/server/GraphModel.js";
 
 const DEVELOPMENT_MODE = privateEnvVars.NODE_ENV === 'development' || privateEnvVars.DEV_MODE === 'true';
-const FORCE_RENDER = true;
+const FORCE_RENDER = false;
 
 const APP_ROOT_PATH = appRootPath.toString();
 const APP_DATA_DIR = path.join(APP_ROOT_PATH, 'data');
@@ -16,49 +16,58 @@ const JSON_FILE_PATH = path.join(APP_DATA_DIR, 'references.json');
 // Loads initial JSON data
 let data = loadJSONData(JSON_FILE_PATH);
 
+// Processes data from file to
 let preprocessor = new Preprocessor();
-let results = preprocessor.preprocess(data.entries);
-
-const nodes = results.nodes;
-const edges = results.edges;
-const facets = results.facets;
-const errors = results.errors;
+const {
+    nodes,
+    edges,
+    facets,
+    errors
+} = preprocessor.preprocess(data.entries);
 
 if (DEVELOPMENT_MODE && errors.length > 0) {
-    // TODO: Flyt til env
-    const ERROR_FILE_PATH = "/Users/au335497/Temp/orige-net/errors.json";
-    saveJSONData(ERROR_FILE_PATH, errors);
+    const ERROR_FILE_PATH = privateEnvVars.ERROR_FILE_PATH;
+    if (ERROR_FILE_PATH) {
+        saveJSONData(ERROR_FILE_PATH, errors);
+    }
 }
 
 let graphModel;
 
-// DEV MODE
-if (DEVELOPMENT_MODE && !FORCE_RENDER) {
-    // TODO: Flyt til env
-    const GRAPH_FILE_PATH = "/Users/au335497/Temp/orige-net/graph.json"; // Change in prod.
+const GRAPH_FILE_PATH = privateEnvVars.GRAPH_FILE_PATH;
+console.log(GRAPH_FILE_PATH);
 
+// DEV MODE
+if (DEVELOPMENT_MODE && GRAPH_FILE_PATH && !FORCE_RENDER) {
     try {
         if (fs.existsSync(GRAPH_FILE_PATH)) {
-            graphModel = Graph.from(loadJSONData(GRAPH_FILE_PATH));
+            console.log('Loading graph from existing file.');
+            const graph = Graph.from(loadJSONData(GRAPH_FILE_PATH));
+            graphModel = new GraphModel(graph, facets);
         } else {
-            graphModel = new GraphModel(nodes, edges, facets);
+            console.log('No existing file found. Creating new graph model.')
+            graphModel = new GraphModel({ nodes, edges }, facets);
             graphModel.init({ calculateCentrality: 'degree' });
 
-            saveJSONData(GRAPH_FILE_PATH, graphModel.export())
+            saveJSONData(GRAPH_FILE_PATH, graphModel.graph)
         }
     } catch (err) {
         console.error('Something went wrong. Creating new graph.')
     }
 } else {
     // PRODUCTION
-    graphModel = new GraphModel(nodes, edges, facets);
+    graphModel = new GraphModel({ nodes, edges }, facets);
     graphModel.init({ calculateCentrality: 'degree' });
 }
+
+console.log('---');
+console.log('Web app is up and running! :-)');
+console.log('---');
 
 export { graphModel }
 
 /**
- * Main data loader function
+ * Loads JSON from a file path
  * @param {string} filePath
  * @return {*}
  */
@@ -72,6 +81,11 @@ function loadJSONData(filePath) {
     }
 }
 
+/**
+ * Saves JSON data to a file path
+ * @param {string} filePath
+ * @param {*} data
+ */
 function saveJSONData(filePath, data) {
     try {
         fs.writeFileSync(filePath, JSON.stringify(data), 'utf-8');
