@@ -303,7 +303,39 @@ let abbreviations = [
     {
         work: 'Revelation',
         abbreviation: 'Rev'
-    }
+    },
+    {
+        work: 'Shepherd of Hermas, Mandate(s)',
+        abbreviation: 'Herm.Mand.'
+    },
+    {
+        work: 'Shepherd of Hermas, Vision(s)',
+        abbreviation: 'Herm.Vis.'
+    },
+    {
+        work: '1 Clement',
+        abbreviation: '1Clem'
+    },
+    {
+        work: '2 Clement',
+        abbreviation: '2Clem'
+    },
+    {
+        work: 'Barnabas',
+        abbreviation: 'Barn'
+    },
+    {
+        work: '1 Enoch',
+        abbreviation: '1En'
+    },
+    {
+        work: '2 Enoch',
+        abbreviation: '2En'
+    },
+    {
+        work: 'Gospel of the Hebrews',
+        abbreviation: 'Gos.Heb.'
+    },
 ];
 
 /**
