@@ -48,6 +48,12 @@
               "value": "In Canticum canticorum (libri duo quos scripsit in adulescentia) (Cant.(Adulesc.))",
               "title": "In Canticum canticorum (libri duo quos scripsit in adulescentia) (Cant.(Adulesc.))"
             }, {
+              "value": "Commentarii in evangelium Joannis (Comm.Jo.)",
+              "title": "Commentarii in evangelium Joannis (Comm.Jo.)"
+            }, {
+              "value": "Commentarii in Romanos (Comm.Rom.)",
+              "title": "Commentarii in Romanos (Comm.Rom.)"
+            }, {
               "value": "Commentarius in Canticum (Comm.Cant.)",
               "title": "Commentarius in Canticum (Comm.Cant.)"
             }, {
@@ -57,20 +63,20 @@
               "value": "Commentarii in Genesim (Comm.Gen.)",
               "title": "Commentarii in Genesim (Comm.Gen.)"
             }, {
-              "value": "Commentarii in evangelium Joannis (Comm.Jo.)",
-              "title": "Commentarii in evangelium Joannis (Comm.Jo.)"
-            }, {
               "value": "Commentarium in evangelium Matthaei (Comm.Matt.)",
               "title": "Commentarium in evangelium Matthaei (Comm.Matt.)"
-            }, {
-              "value": "Commentarii in Romanos (Comm.Rom.)",
-              "title": "Commentarii in Romanos (Comm.Rom.)"
             }, {
               "value": "Commentarium series in evangelium Matthaei (Comm.ser.Matt.)",
               "title": "Commentarium series in evangelium Matthaei (Comm.ser.Matt.)"
             }, {
+              "value": "De principiis (Peri archōn) First Principles (Princ.)",
+              "title": "De principiis (Peri archōn) First Principles (Princ.)"
+            }, {
               "value": "Diologus cum Heraclide  (Dial.)",
               "title": "Diologus cum Heraclide  (Dial.)"
+            }, {
+              "value": "Epistula ad Africanum (Ep.Afr.)",
+              "title": "Epistula ad Africanum (Ep.Afr.)"
             }, {
               "value": "Exhortatio ad martyrium  (Mart.)",
               "title": "Exhortatio ad martyrium  (Mart.)"
@@ -80,9 +86,6 @@
             }, {
               "value": "De engastrimytho  (Engastr.)",
               "title": "De engastrimytho  (Engastr.)"
-            }, {
-              "value": "Epistula ad Africanum (Ep.Afr.)",
-              "title": "Epistula ad Africanum (Ep.Afr.)"
             }, {
               "value": "Epistula ad Gregorium Thaumaturgum (Ep.Greg.)",
               "title": "Epistula ad Gregorium Thaumaturgum (Ep.Greg.)"
@@ -96,14 +99,14 @@
               "value": "Expositio in Proverbia (Exp.Prov.)",
               "title": "Expositio in Proverbia (Exp.Prov.)"
             }, {
+              "value": "Fragmenta ex commentariis in epistulam i ad Corinthios (Fr.1Cor.)",
+              "title": "Fragmenta ex commentariis in epistulam i ad Corinthios (Fr.1Cor.)"
+            }, {
               "value": "Fragmentum ex homiliis in Acta apostolorum (Fr.Act.)",
               "title": "Fragmentum ex homiliis in Acta apostolorum (Fr.Act.)"
             }, {
               "value": "Libri x in Canticum canticorum (Fr.Cant.)",
               "title": "Libri x in Canticum canticorum (Fr.Cant.)"
-            }, {
-              "value": "Fragmenta ex commentariis in epistulam i ad Corinthios (Fr.1Cor.)",
-              "title": "Fragmenta ex commentariis in epistulam i ad Corinthios (Fr.1Cor.)"
             }, {
               "value": "Fragmenta ex commentariis in epistulam ad Ephesios (Fr.Eph.)",
               "title": "Fragmenta ex commentariis in epistulam ad Ephesios (Fr.Eph.)"
@@ -203,9 +206,6 @@
             }, {
               "value": "Philocalia (Philoc.)",
               "title": "Philocalia (Philoc.)"
-            }, {
-              "value": "De principiis (Peri archōn) First Principles (Princ.)",
-              "title": "De principiis (Peri archōn) First Principles (Princ.)"
             }, {
               "value": "De resurrectione libri ii (Res.)",
               "title": "De resurrectione libri ii (Res.)"
