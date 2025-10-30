@@ -172,6 +172,7 @@ a:hover {
 #extra-panel {
     padding: 0;
     display: none;
+    text-align: right;
 }
 
 #extra-panel > * {
@@ -212,6 +213,8 @@ a:hover {
         display: initial;
         top: initial;
         bottom: var(--small-gap);
+        background-color: #ffffff;
+        padding: var(--small-gap);
     }
 
     #search-filter-panel-container {
