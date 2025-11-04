@@ -3,7 +3,7 @@
 This is web application for the Orige.net project.
 - Project PI: Giovanni Hermanin De Reichenfeld (giovanni.hermanin@cas.au.dk)
 - Project details: https://pure.au.dk/portal/da/projects/marie-sk%C5%82odowska-curie-project-scriptural-networks-digital-explor
-- Developed by [Center for Humanities Computing](https://chc.au.dk).
+- Developed by [Center for Humanities Computing](https://chc.au.dk)
 
 ## About the web application
 The web application is a lightweight viewer of the literary references in Origen of Alexandria.

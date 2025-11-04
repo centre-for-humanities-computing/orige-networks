@@ -24,4 +24,4 @@ This section is under construction and will be implemented shortly.
 WIP.
 
 ### Terms of use
-Any use of this website and database in connection with scientific work must acknowledge Center for Humanities Computing.
+Any use of this website and database in connection with scientific work must reference and acknowledge [Center for Humanities Computing](https://chc.au.dk), Aarhus University.
