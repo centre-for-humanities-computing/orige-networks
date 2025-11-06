@@ -15,6 +15,9 @@
     <div class="nav-item">
         <a href={resolve("/glossaries")}>Glossaries</a>
     </div>
+    <div class="nav-item">
+        <a href={resolve("/how-to-use")}>How to use</a>
+    </div>
  <div class="nav-item">
   <a href={resolve("/about")}>About</a>
  </div>
