@@ -437,7 +437,7 @@
             isFilterPanel={true}
             filterOptions={{
                 filterType: "doctrine",
-                filterModes: ['any', 'all']
+                filterModes: ['all', 'any']
             }}
     >
         <FilterList
