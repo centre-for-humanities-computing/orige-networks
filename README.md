@@ -56,4 +56,4 @@ When triggered, the workflow builds the project and uploads the resulting build 
 ### Editing 'about' and 'glossaries'
 
 These files are in a Markdown format
-(https://www.markdownguide.org/). They can be found and edited as markdown-formatted text under `/lib/server/assets/`.
+(https://www.markdownguide.org/). They can be found and edited as markdown-formatted text under `/src/lib/assets/`.
