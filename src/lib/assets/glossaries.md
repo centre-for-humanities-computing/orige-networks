@@ -10,14 +10,14 @@ Orige.net project aims to provide visual NA graphs of Origen’s use of biblical
 A quotation is a statement that maintains a degree of "otherness," indicating its origin in a text perceived as external to the author’s own work. As Gary Saul Morson defines it, "a quotation repeats the words of another _as_ the words of another" (Morson 2011, 78). In other words, a quotation is distinguished by its reproduction of an original source – the biblical texts – with the clear intention of presenting it as a reenactment. Thus, the defining criterion for determining when Origen is quoting a biblical text is **intentionality**. Regardless of the length of the quotation, any set of words spoken by Origen that is clearly intended to reference a specific biblical passage qualifies as a quotation. This also includes also the so-called "misquotations" – cases in which the biblical texts are misspelled – and the "indirect quotations" – cases where a passage is quoted indirectly, without using its exact wording, e.g. reference to the "prodigal son" without a specific reference to Luke 15:11-32. No distinction has been made between quotations and allusions. This implies that, for a passage to be recognised as a quotation, it must be identifiable as such. For example, not every mention of the doctrine of the "Logos" in Origen’s writings is a quotation of the prologue to John's Gospel. However, when Origen refers to the "Logos-in-the-beginning," he is clearly referring to John 1:1, because his language deliberately mirrors that of the biblical text. Although discerning an author's intent is not always possible, Origen’s philological precision in quoting the biblical text suggests that, in nearly all instances of his use of Scripture, his intentionality can be reasonably identified. In order to facilitate it, all the critical editions of Origen’s work (together with the SC volumes and several translations) have been consulted during the data collection to verify any discrepancies in the identification of biblical quotations.
 
 ## Doctrine glossary
-1. ****Eschatology****: References to the end of times and the future condition of rational beings after the end of this world. 
-2. ****Apokatastasis/Restoration****: References to the specific doctrine of restoration of all rational beings into communion with God. 
-3. ****Ages/Aeon****: References to the present and future ages of the world, including the final age.
-4. ****Reincarnation/Metempsychosis/Metemsomatosis****: References to the Greek doctrine of reincarnation, involving the transmigration of souls. 
-5. ****Sin/Transgression****: References to Origen’s understanding of sin, encompassing both its nature and the classification of different types of sins.
-6. ****Fall/Original Sin****: References to the original sin, both as the transgression of Adam and Eve and as the primordial fall of rational creatures from God.
-7. ****Judgement****: References to the final judgment enacted by God, including its nature and consequences.
-8. ****Punishment****: References to the nature and forms of divine punishment administered by God, both in this age and in the ages to come.
+1. **Eschatology**: References to the end of times and the future condition of rational beings after the end of this world. 
+2. **Apokatastasis/Restoration**: References to the specific doctrine of restoration of all rational beings into communion with God. 
+3. **Ages/Aeon**: References to the present and future ages of the world, including the final age.
+4. **Reincarnation/Metempsychosis/Metemsomatosis**: References to the Greek doctrine of reincarnation, involving the transmigration of souls. 
+5. **Sin/Transgression**: References to Origen’s understanding of sin, encompassing both its nature and the classification of different types of sins.
+6. **Fall/Original Sin**: References to the original sin, both as the transgression of Adam and Eve and as the primordial fall of rational creatures from God.
+7. **Judgement**: References to the final judgment enacted by God, including its nature and consequences.
+8. **Punishment**: References to the nature and forms of divine punishment administered by God, both in this age and in the ages to come.
 9. **Hell/Ades**: References both to the underworld in general and to hell specifically.
 10. **Death**: References to the theological significance of death, both as a physical event and in its symbolic meaning.
 11. **Evil**: References to the nature, origin, and manifestations of evil.
